@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: gateway
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      enabled: true
+      routes:
+      - id: timeout_demo
+        uri: http://destination-service-balancer-1447849684.us-east-1.elb.amazonaws.com:8080
+        predicates:
+        - Path=/api/timeout-scg/**
+        filters:
+        - RewritePath=/api/timeout-scg(?<segment>.*), $\{segment}
+      httpclient:
+        response-timeout: 1m
+        wiretap: true
+        pool:
+          max-life-time: 3m
+          max-idle-time: 50s
+server:
+  port: 8081
+logging:
+  level:
+    '[reactor.netty]': TRACE

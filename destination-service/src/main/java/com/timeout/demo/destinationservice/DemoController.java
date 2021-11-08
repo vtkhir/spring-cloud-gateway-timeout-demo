@@ -14,6 +14,7 @@ public class DemoController {
 
     @GetMapping
     Map<String, Object> testEndpoint() throws InterruptedException {
+        // Sleep to simulate some work
         Thread.sleep(200);
         var body = repeat("Z", 11000);
         return Map.of("test", body);

@@ -9,7 +9,7 @@ spring:
       enabled: true
       routes:
       - id: timeout_demo
-        uri: http://destination-service-balancer-1447849684.us-east-1.elb.amazonaws.com:8080
+        uri: http://scg-issue-2429-960258397.eu-west-2.elb.amazonaws.com:8080
         predicates:
         - Path=/api/timeout-scg/**
         filters:
